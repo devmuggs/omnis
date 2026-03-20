@@ -1,0 +1,7 @@
+[package]
+name = "omnis-cli"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+omnis-core = { path = "../omnis-core/" }

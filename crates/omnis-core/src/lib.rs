@@ -1,0 +1,3 @@
+fn hola() {
+    println!("hola!");
+}

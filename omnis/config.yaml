@@ -1,0 +1,11 @@
+name: "my-omnis-project"
+version: "0.1.0"
+
+settings:
+  emitters:
+    typescript:
+      emitter: "../emitters/typescript/zod-v4"
+      output: "../.generated/typescript"
+    python:
+      emitter: "../emitters/python/pydantic-v2"
+      output: "../.generated/python"
