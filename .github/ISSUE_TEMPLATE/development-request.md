@@ -1,8 +1,8 @@
 ---
 name: Development Request
 about: This issue represents a specific and scoped piece of development effort.
-title: "\U0001F527 - Develop - "
-labels: ''
+title: "[DEV] - "
+labels: enhancement
 assignees: devmuggs
 
 ---
