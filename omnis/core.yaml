@@ -1,0 +1,88 @@
+# Phase 1: Foundation
+
+HttpStatusCode:
+  $enum:
+    - Okay, 200
+    - Created, 201
+    - NoContent, 204
+    - BadRequest, 400
+    - NotFound, 404
+    - InternalServerError, 500
+
+AuthenticationStatusKind:
+  $enum:
+    - PendingVerification, pending-verification
+    - Verified, verified
+
+MVP1User:
+  email: string
+  username: string
+  password: string
+  registeredAt: datetime
+  deletedAt: datetime | null
+  verifiedAt: datetime | null
+  authenticationStatus: $AuthenticationStatusKind
+
+MVP1UserCreateData:
+  email: string
+  username: string
+  password: string
+
+MVP1UserUpdateData:
+  email: string | undefined
+  username: string | undefined
+  password: string | undefined
+
+AppState:
+  currentUser: $MVP1User | null
+
+# MVP 2: Type Algebra
+
+UserBase:
+  email: string
+  username: string
+  password: string
+  registeredAt: datetime
+  deletedAt: datetime | null
+
+PendingVerificationUser:
+  $extends: UserBase
+  authenticationStatus: $AuthenticationStatusKind.PendingVerification
+
+VerifiedUser:
+  $extends: UserBase
+  authenticationStatus: $AuthenticationStatusKind.Verified
+  verifiedAt: datetime
+
+User:
+  $union:
+    field: authenticationStatus # omnis will ensure all models have this field in definintions
+    models:
+      - PendingVerificationUser
+      - VerifiedUser
+
+UserEditableFields:
+  $omit:
+    model: $UserBase
+    fields:
+      - registeredAt
+      - deletedAt
+
+UserCreateData:
+  $pick:
+    model: $UserEditableFields
+    fields:
+      - email
+      - username
+      - password
+
+UserUpdateData:
+  $partial: $UserEditableFields
+
+Paginated(T):
+  data: list($T)
+  total: int32
+  nextCursor: string | null
+
+UserPage:
+  model: $Paginated($User)
