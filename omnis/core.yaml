@@ -1,18 +1,22 @@
 # Phase 1: Foundation
 
 HttpStatusCode:
-  $enum:
-    - Okay, 200
-    - Created, 201
-    - NoContent, 204
-    - BadRequest, 400
-    - NotFound, 404
-    - InternalServerError, 500
+  - Okay, 200
+  - Created, 201
+  - NoContent, 204
+  - BadRequest, 400
+  - NotFound, 404
+  - InternalServerError, 500
 
 AuthenticationStatusKind:
-  $enum:
-    - PendingVerification, pending-verification
-    - Verified, verified
+  - PendingVerification, "pending-verification"
+  - Verified, "verified"
+
+DifficultLevelKind:
+  - Easy
+  - Medium
+  - Hard
+  - Nightmare
 
 MVP1User:
   email: string
