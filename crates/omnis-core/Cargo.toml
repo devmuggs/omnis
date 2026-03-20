@@ -2,3 +2,9 @@
 name = "omnis-core"
 version.workspace = true
 edition.workspace = true
+
+[dependencies]
+indexmap = { version = "2.13.0", features = ["serde"] }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_yaml = "0.9.34"
+tera = "1.20.1"

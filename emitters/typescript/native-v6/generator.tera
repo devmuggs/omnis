@@ -1,0 +1,13 @@
+
+{%- for name, entity in entities %}
+  {% if entity.kind == "model" %}
+    // Generate Model: {{ name }}
+  {% elif entity.kind == "enum" %}
+    export type {{name}} = (typeof {{name}})[keyof typeof {{name}}];
+    export const {{name}} = Object.freeze({ 
+      {%- for variant in entity.variants %}
+        {{variant.label}}: {{variant.value}},
+      {%- endfor %}
+    }); 
+  {% endif %}
+{%- endfor %}
